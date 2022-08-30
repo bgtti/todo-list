@@ -1,4 +1,13 @@
 .TodoItem{
     display: flex;
-    background-color: blueviolet;
+    /* background-color: blueviolet; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+}
+.TodoItem-icon{
+    width: 1.1em;
+    height: 1.1em;
+    /* padding: 0 0.2em 0 0.2em; */
 }

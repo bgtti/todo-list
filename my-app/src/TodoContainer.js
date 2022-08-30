@@ -11,23 +11,33 @@ class TodoContainer extends Component {
                 { id: uuidv4(), itemText: "buy bananas" },
                 { id: uuidv4(), itemText: "buy potatoes" }
             ],
-            newTodo: ""
+            newTodo: "",
+            todoOnEdit: "",
         }
         this.changeTodoList = this.changeTodoList.bind(this);
         this.renderTodoItems = this.renderTodoItems.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
     }
     renderTodoItems() {
         return (
             <div>
                 {this.state.todoList.map(
                     item => (
-                        <TodoItem todo={item.itemText}></TodoItem>
+                        <TodoItem todo={item.itemText} value={item} deleteItem={this.deleteItem}  ></TodoItem>
                     )
                 )}
             </div>
         )
+    }
+    deleteItem(item) {
+        //deletion
+        console.log("deleting")
+        this.setState(curState => ({
+            todoList: curState.todoList.filter(i => i !== item)
+        }));
+        this.renderTodoItems();
 
     }
     changeTodoList() {
@@ -42,6 +52,7 @@ class TodoContainer extends Component {
     handleChange(e) {
         this.setState({
             [e.target.name]: e.target.value
+            //...setState(st => ({nums: st.nums.filter(n=> n!==num)})) where num is arg to function
         })
     }
     handleSubmit(e) {
@@ -68,3 +79,15 @@ class TodoContainer extends Component {
     }
 }
 export default TodoContainer;
+
+// renderTodoItems() {
+//     return (
+//         <div>
+//             {this.state.todoList.map(
+//                 item => (
+//                     <TodoItem todo={item.itemText} value={item} editTodo={this.state.todoOnEdit} deleteItem={this.deleteItem} handleChange={this.handleChange}  ></TodoItem>
+//                 )
+//             )}
+//         </div>
+//     )
+// }
