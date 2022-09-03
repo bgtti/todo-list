@@ -1,0 +1,14 @@
+.Footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 10px;
+    color: rgba(0, 0, 0, 0.425);
+}
+.Footer img{
+    width: 20px;
+    filter: invert(5%) sepia(14%) saturate(1222%) hue-rotate(184deg) brightness(88%) contrast(88%);
+}
+
+/* convert hex to CSS filter:  https://codepen.io/sosuke/pen/Pjoqqp  */

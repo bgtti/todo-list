@@ -19,24 +19,36 @@ class TodoContainer extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
+        this.editItem = this.editItem.bind(this);
     }
     renderTodoItems() {
         return (
             <div>
                 {this.state.todoList.map(
                     item => (
-                        <TodoItem todo={item.itemText} value={item} deleteItem={this.deleteItem}  ></TodoItem>
+                        <TodoItem todo={item.itemText} value={item} deleteItem={this.deleteItem} editItem={this.editItem} handleChange={this.handleChange} todoOnEdit={this.state.todoOnEdit} ></TodoItem>
                     )
                 )}
             </div>
         )
     }
     deleteItem(item) {
-        //deletion
-        console.log("deleting")
         this.setState(curState => ({
             todoList: curState.todoList.filter(i => i !== item)
         }));
+        this.renderTodoItems();
+
+    }
+    editItem(item) {
+        const allToDos = [...this.state.todoList];
+        const todoIndex = allToDos.findIndex(todo => {
+            return todo.id === item.id;
+        })
+        allToDos[todoIndex].itemText = this.state.todoOnEdit;
+        this.setState(curState => ({
+            todoList: [...allToDos],
+            todoOnEdit: ""
+        }))
         this.renderTodoItems();
 
     }
@@ -52,7 +64,6 @@ class TodoContainer extends Component {
     handleChange(e) {
         this.setState({
             [e.target.name]: e.target.value
-            //...setState(st => ({nums: st.nums.filter(n=> n!==num)})) where num is arg to function
         })
     }
     handleSubmit(e) {
@@ -66,11 +77,11 @@ class TodoContainer extends Component {
                 <h1>Todo List</h1>
                 <hr />
                 {this.renderTodoItems()}
-                <form onSubmit={this.handleSubmit}>
-                    <label htmlFor="newTodo">New Todo</label>
-                    <div>
-                        <input name="newTodo" id="newTodo" type="text" placeholder="New Todo" value={this.state.newTodo} onChange={this.handleChange} />
-                        <button>Add Todo</button>
+                <form onSubmit={this.handleSubmit} className='TodoContainer-addNewTodoContainer'>
+                    <label htmlFor="newTodo">Add New Todo:</label>
+                    <div >
+                        <input name="newTodo" id="newTodo" type="text" placeholder="New Todo" value={this.state.newTodo} onChange={this.handleChange} className='TodoContainer-AddTodoInput' />
+                        <button className='TodoContainer-AddTodoBtn'>Add Todo</button>
                     </div>
 
                 </form>
@@ -79,15 +90,3 @@ class TodoContainer extends Component {
     }
 }
 export default TodoContainer;
-
-// renderTodoItems() {
-//     return (
-//         <div>
-//             {this.state.todoList.map(
-//                 item => (
-//                     <TodoItem todo={item.itemText} value={item} editTodo={this.state.todoOnEdit} deleteItem={this.deleteItem} handleChange={this.handleChange}  ></TodoItem>
-//                 )
-//             )}
-//         </div>
-//     )
-// }
