@@ -9,7 +9,8 @@ class TodoContainer extends Component {
         this.state = {
             todoList: [
                 { id: uuidv4(), itemText: "buy bananas" },
-                { id: uuidv4(), itemText: "buy potatoes" }
+                { id: uuidv4(), itemText: "buy potatoes" },
+                { id: uuidv4(), itemText: "take trash out" }
             ],
             newTodo: "",
             todoOnEdit: "",

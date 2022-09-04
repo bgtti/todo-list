@@ -18,7 +18,7 @@ class TodoItem extends Component {
         this.schwitchMode = this.schwitchMode.bind(this);
     }
     handleDelete(e) {
-        this.props.deleteItem(this.props.value); //value in parent, deleteItem in parent
+        this.props.deleteItem(this.props.value);
     }
     schwitchMode(e, mode) {
         let todoItemContainer = e.currentTarget.parentNode;
